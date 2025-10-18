@@ -1,20 +1,64 @@
-
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
+# ----------------------------
+# Fichiers de dépendances
+# ----------------------------
 /vendor/
-###< symfony/framework-bundle ###
+!/vendor/.gitkeep
 
-###> phpunit/phpunit ###
+# ----------------------------
+# Cache et logs Symfony
+# ----------------------------
+/var/
+/var/cache/
+/var/log/
+/var/sessions/
+
+# ----------------------------
+# Configuration locale et secrets
+# ----------------------------
+.env
+.env.local
+.env.local.php
+.env.test
+.env.test.local
+/.phpunit.result.cache
 /phpunit.xml
-/.phpunit.cache/
-###< phpunit/phpunit ###
 
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
+# ----------------------------
+# IDE / éditeur
+# ----------------------------
+.idea/
+.vscode/
+*.swp
+*~
+
+# ----------------------------
+# Système
+# ----------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ----------------------------
+# Assets compilés
+# ----------------------------
+/public/build/
+/public/bundles/
+
+# ----------------------------
+# Fichiers temporaires
+# ----------------------------
+*.log
+*.tmp
+
+# ----------------------------
+# Composer
+# ----------------------------
+composer.phar
+
+# ----------------------------
+# Node / npm (si utilisé)
+# ----------------------------
+/node_modules/
+npm-debug.log
+yarn-error.log
