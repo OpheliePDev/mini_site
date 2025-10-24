@@ -11,15 +11,15 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Titre</th>
             <th>Description</th>
-            <th>IsDone</th>
-            <th>Priority</th>
-            <th>CreatedAt</th>
+            <th>Fait</th>
+            <th>Créer le :</th>
+            <th>Priorité</th>
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="shadow-sm border-0">
     {% for task in tasks %}
         <tr>
             <td>
@@ -44,12 +44,11 @@
                 {% endif %}
             </td>
             <td>
-                <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-info">Voir</a>
-                <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Modifier</a>
-                <a href="{{ path('app_task_delete', {'id': task.id}) }}" class="btn btn-danger">Supprimer</a>
+                <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
                 {% if not task.isDone %}
                     <form action="{{ path('app_task_done', {'id': task.id}) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-success">Marquer comme terminée</button>
+                        <button type="submit" class="btn btn-success btn-sm">Marquer comme terminée</button>
                     </form>
                 {% endif %}
             </td>
@@ -62,6 +61,6 @@
     </tbody>
 </table>
 
-<a href="{{ path('app_task_new') }}">Create new</a>
-<a href="{{ path('app_task_completed') }}">Voir les tâches terminées</a>
+<a href="{{ path('app_task_new') }}" class="btn btn-outline-primary btn-sm">Créer une nouvelle tâche</a>
+<a href="{{ path('app_task_completed') }}" class="btn btn-outline-secondary btn-sm">Voir les tâches terminées</a>
 {% endblock %}
