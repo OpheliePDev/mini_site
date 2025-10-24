@@ -20,7 +20,7 @@ final class Version20251024151530 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE task CHANGE description description LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE task CHANGE description description LONGTEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
