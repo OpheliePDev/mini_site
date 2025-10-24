@@ -1,0 +1,53 @@
+{# templates/task/_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+<fieldset class="mb-3">
+    {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+    {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titre de la tâche'}}) }}
+    {{ form_errors(form.title) }}
+</fieldset>
+
+<fieldset class="mb-3">
+    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Détails'}}) }}
+    {{ form_errors(form.description) }}
+</fieldset>
+<fieldset class="mb-3">
+    {{ form_label(form.priority, 'Priorité', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+    {{ form_widget(form.priority, {'attr': {'class': 'form-control', 'placeholder': 'Détails'}}) }}
+    {{ form_errors(form.priority) }}
+</fieldset>
+<article class="card border-0 shadow-sm mb-4">
+    <section class="card-body bg-light rounded-3">
+        <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-calendar3 text-primary fs-4 me-2"></i>
+            <h5 class="card-title mb-0 fw-semibold">Date de création</h5>
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-text bg-primary text-white border-0">
+                <i class="bi bi-clock"></i>
+            </span>
+            {{ form_widget(form.createdAt, {
+                'attr': {
+                    'class': 'form-control border-0 shadow-sm bg-white',
+                    'readonly': true
+                }
+            }) }}
+        </div>
+
+        <div class="mt-2">
+            <p class="text-muted small fst-italic text-center mb-0">
+                <i class="bi bi-info-circle"></i>
+                Cette date est fixée automatiquement lors de la création de la tâche.
+            </p>
+        </div>
+
+        {{ form_errors(form.createdAt) }}
+    </section>
+</article>
+
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}

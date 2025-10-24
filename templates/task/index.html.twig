@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block body %}
+<h1>Task</h1>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>    
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>IsDone</th>
+            <th>Priority</th>
+            <th>CreatedAt</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+        <tr>
+            <td>
+                {% if task.isDone %}
+                    ✅ <s>{{ task.title }}</s>
+                {% else %}
+                    🔹 {{ task.title }}
+                {% endif %}
+            </td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.isDone ? 'Yes' : 'No' }}</td>
+            <td>{{ task.createdAt ? task.createdAt|date('Y-m-d') : '' }}</td>
+            <td>
+                {% if task.priority == 'High' %}
+                    <span class="badge bg-danger">Haute 🔥</span>
+                {% elseif task.priority == 'Medium' %}
+                    <span class="badge bg-warning text-dark">Moyenne ⚖️</span>
+                {% elseif task.priority == 'Low' %}
+                    <span class="badge bg-success">Faible 🌱</span>
+                {% else %}
+                    <span class="badge bg-secondary">Non définie</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Modifier</a>
+                <a href="{{ path('app_task_delete', {'id': task.id}) }}" class="btn btn-danger">Supprimer</a>
+                {% if not task.isDone %}
+                    <form action="{{ path('app_task_done', {'id': task.id}) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-success">Marquer comme terminée</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">No records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('app_task_new') }}">Create new</a>
+<a href="{{ path('app_task_completed') }}">Voir les tâches terminées</a>
+{% endblock %}
