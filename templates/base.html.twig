@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-FR">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Mon site{% endblock %}</title>
@@ -10,31 +10,33 @@
 <body>
     
     <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('app_home') }}">{{ site.name }}</a>
-                <div class="collapse navbar-collapse">
-                    <nav class="navbar-nav">
-                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
-                        <a class="nav-link" href="{{ path('about') }}">À propos</a>
-                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
-                        <a class="nav-link" href="{{ path('app_task_index') }}">ToDoList</a>
-                    </nav>
-                </div>
-            </div>
-        </nav>
+        <nav class="navbar navbar-expend-lg navbar-dark bg-primary shadow-sm">
+            <section class="container-fluid d-flex justify-content-between align-items-center px-4">
+                <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">Symfony ToDoList</a>
+                <nav class="d-flex gap-3">
+                    <a href="{{ path('app_home') }}" class="nav-link text-white">Accueil</a>
+                    <a href="{{ path('about') }}" class="nav-link text-white">À propos</a>
+                    <a href="{{ path('app_task_index') }}" class="nav-link text-white">ToDoList</a>
+                    <a href="{{ path('contact') }}" class ="nav-link text-white">Contact</a>
+                </nav>
+            </section>
+        </nav>        
     </header>
 
-    <main class="container">
+    <main class="container py-4">
         {% block body %}{% endblock %}
     </main>
 
-    <footer>
+    <footer class="text-center mt-5 py-4 bg-light border-top">
         {% if site.logo %}
-            <img src="{{ site.logo }}" alt="{{ site.name }}" class="logo">
+            <figure>
+                <img src="{{ site.logo }}" alt="{{ site.name }}" class="logo mb-2">
+            </figure>
         {% endif %}
-        <p>© {{ site.name }} - {{ "now"|date("Y") }}</p>
-        <p>Contact : <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        <p class="mb-1 text-muted">© {{ site.name }} - {{ "now"|date("Y") }}</p>
+        <p class="text-muted small">
+            Contact : <a href="mailto:{{ site.email }}" class="text-decoration-none">{{ site.email }}</a>
+        </p>
     </footer>
 </body>
 </html>
