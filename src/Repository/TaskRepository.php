@@ -16,23 +16,24 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
-    public function findIncompletedTasks(): array
+    /**
+     *  Trouve toutes les tâches, avec les tâches non terminées d'abord.
+     * 
+     * @param int|null $taskListId
+     * @return Task[]
+     */
+    public function findOrderByStatus(?int $taskListId = null): array
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.isDone = :done')
-            ->setParameter('done', false)
-            ->orderBy('t.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+        $qb = $this->createQueryBuilder('t')
+            ->orderBy('t.isDone', 'ASC')
+            ->addOrderBy('t.createdAt', 'DESC');
+        
+            if ($taskListId) {
+                $qb->andWhere('t.taskList = :taskList')
+                   ->setParameter('taskList', $taskListId);
+            }
+
+            return $qb->getQuery()->getResult();
     }
 
-    public function findCompletedTasks(): array
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.isDone = :done')
-            ->setParameter('done', true)
-            ->orderBy('t.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
 }

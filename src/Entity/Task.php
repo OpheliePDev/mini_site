@@ -3,9 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
@@ -16,16 +14,9 @@ class Task
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide.')]
-    #[Assert\Length(
-        min: 3,
-        max: 50,
-        minMessage: 'Le titre doit contenir au moins {{ limit }} caractères.',
-        maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
-    )]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: "text", nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -34,12 +25,16 @@ class Task
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 50)]
     private ?string $priority = null;
+
+    #[ORM\ManyToOne(targetEntity: TaskList::class, inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?TaskList $taskList = null;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();   
     }
 
     public function getId(): ?int
@@ -52,10 +47,9 @@ class Task
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -64,10 +58,9 @@ class Task
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -76,10 +69,9 @@ class Task
         return $this->isDone;
     }
 
-    public function setIsDone(bool $isDone): static
+    public function setIsDone(bool $isDone): self
     {
         $this->isDone = $isDone;
-
         return $this;
     }
 
@@ -88,10 +80,9 @@ class Task
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -100,10 +91,20 @@ class Task
         return $this->priority;
     }
 
-    public function setPriority(string $priority): static
+    public function setPriority(string $priority): self
     {
         $this->priority = $priority;
+        return $this;
+    }
 
+    public function getTaskList(): ?TaskList
+    {
+        return $this->taskList;
+    }
+    
+    public function setTaskList(?TaskList $taskList): self
+    {
+        $this->taskList = $taskList;
         return $this;
     }
 }

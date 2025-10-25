@@ -14,27 +14,22 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', null, [
-                'attr' => ['maxlength' => 50],
-            ])
-            ->add('description', null, [
-                'required' => false,
-            ])
+            ->add('title')
+            ->add('description')
             ->add('priority', ChoiceType::class, [
                 'choices' => [
                     'Haute 🔥' => 'High',
                     'Moyenne ⚖️' => 'Medium',
-                    'Faible 🌱' => 'Low',
+                    'Faible 🌱' => 'Low'
                 ],
                 'placeholder' => 'Sélectionne une priorité',
-                'label' => 'Priorité',
                 'attr' => [
-                    'class' => 'form-select'
+                    'class' => 'form-select',
+                    'style' => 'cursor: pointer;'
                 ],
             ])
             ->add('createdAt', DateType::class, [
-                'widget' => 'single_text', // HTML5 input type="date"
-                'label' => 'Date de création',
+                'widget' => 'single_text',
                 'attr' => [
                     'readonly' => true,
                     'class' => 'form-control-plaintext bg-light border-0'

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle liste{% endblock %}
+
+{% block body %}
+<section class="container py-4">
+    <h1 class="text-primary mb-4 text-center">➕ Nouvelle liste</h1>
+
+    {{ form_start(form, {'attr': {'class': 'mx-auto', 'style': 'max-width: 400px;'}}) }}
+        {{ form_row(form.name, {'attr': {'class': 'form-control mb-3', 'placeholder': 'Nom de la liste'}}) }}
+        <button class="btn btn-primary w-100">Créer</button>
+    {{ form_end(form) }}
+
+    <section class="text-center mt-3">
+        <a href="{{ path('app_task_list_index') }}" class="text-muted">⬅️ Retour</a>
+    </section>
+</section>
+{% endblock %}
