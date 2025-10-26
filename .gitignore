@@ -16,6 +16,7 @@
 # Configuration locale et secrets
 # ----------------------------
 .env
+.env.dev
 .env.local
 .env.local.php
 .env.test
