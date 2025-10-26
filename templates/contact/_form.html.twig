@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'class': 'contact-form'}}) }}
+
+<fieldset>
+    <legend>Envoyez-moi un message</legend>
+
+    <label for="{{ form.name.vars.id }}">Nom</label>
+    {{ form_widget(form.name, {'attr': {'placeholder': 'Votre nom'}}) }}
+    {{ form_errors(form.name) }}
+
+    <label for="{{ form.email.vars.id }}">Email</label>
+    {{ form_widget(form.email, {'attr': {'placeholder': 'Votre email'}}) }}
+    {{ form_errors(form.email) }}
+
+    <label for="{{ form.message.vars.id }}">Message</label>
+    {{ form_widget(form.message, {'attr': {'placeholder': 'Votre message'}}) }}
+    {{ form_errors(form.message) }}
+</fieldset>
+
+<button type="submit" class="btn btn-primary">Envoyer</button>
+
+{{ form_end(form) }}

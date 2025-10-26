@@ -3,51 +3,19 @@
 {% block title %}Mes listes de tâches{% endblock %}
 
 {% block body %}
-<section class="container py-4">
-    <h1 class="text-center text-primary mb-4">🗂️ Mes listes de tâches</h1>
+<main class="task-lists-container">
+    <h1 class="page-title">🗂️ Mes listes de tâches</h1>
 
-    {% for task_list in task_lists %}
-        <article class="card shadow-sm border-0 mb-4">
-            <header class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="m-0">{{ task_list.name }}</h5>
-                <nav class="d-flex gap-2">
-                    <a href="{{ path('app_task_list_show', {'id': task_list.id}) }}" class="btn btn-light btn-sm">Voir</a>
-                    <a href="{{ path('app_task_list_edit', {'id': task_list.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
-                    <form method="post" action="{{ path('app_task_list_delete', {'id': task_list.id}) }}" onsubmit="return confirm('Supprimer cette liste ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task_list.id) }}">
-                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                    </form>
-                </nav>
-            </header>
-
-            <ul class="list-group list-group-flush">
-                {% for task in task_list.tasks %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            {% if task.isDone %}
-                                <s>{{ task.title }}</s>
-                            {% else %}
-                                {{ task.title }}
-                            {% endif %}
-                            {% if task.priority %}
-                                <small class="text-muted">[{{ task.priority|capitalize }}]</small>
-                            {% endif %}
-                        </div>
-                        <small class="text-muted">{{ task.createdAt|date('Y-m-d') }}</small>
-                    </li>
-                {% else %}
-                    <li class="list-group-item text-center text-muted">
-                        Aucune tâche dans cette liste.
-                    </li>
-                {% endfor %}
-            </ul>
-        </article>
+    {% if task_lists|length > 0 %}
+        {% for task_list in task_lists %}
+            {% include 'task_list/_task_list_item.html.twig' with {'task_list': task_list} %}
+        {% endfor %}
     {% else %}
-        <p class="text-center text-muted mt-5">Aucune liste créée pour le moment 💤</p>
-    {% endfor %}
+        <p class="no-lists">Aucune liste créée pour le moment 💤</p>
+    {% endif %}
 
-    <section class="text-center mt-4">
+    <footer class="task-list-footer">
         <a href="{{ path('app_task_list_new') }}" class="btn btn-primary">➕ Créer une nouvelle liste</a>
-    </section>
-</section>
+    </footer>
+</main>
 {% endblock %}

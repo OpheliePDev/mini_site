@@ -1,0 +1,23 @@
+<article class="task-list">
+    <header class="task-list-header local-header">
+        <h2>{{ task_list.name }}</h2>
+        <nav class="task-list-actions">
+            <a href="{{ path('app_task_list_show', {'id': task_list.id}) }}" class="btn btn-light">Voir</a>
+            <a href="{{ path('app_task_list_edit', {'id': task_list.id}) }}" class="btn btn-warning">Modifier</a>
+            <form method="post" action="{{ path('app_task_list_delete', {'id': task_list.id}) }}" onsubmit="return confirm('Supprimer cette liste ?');" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task_list.id) }}">
+                <button class="btn btn-danger">Supprimer</button>
+            </form>
+        </nav>
+    </header>
+
+    <section class="task-list-tasks">
+        {% if task_list.tasks|length > 0 %}
+            {% for task in task_list.tasks %}
+                {% include 'task/_task_item.html.twig' with {'task': task} %}
+            {% endfor %}
+        {% else %}
+            <p class="no-tasks">Aucune tâche dans cette liste.</p>
+        {% endif %}
+    </section>
+</article>

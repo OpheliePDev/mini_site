@@ -1,6 +1,20 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contactez moi</h1>
+<main class="contact-page">
+    <header class="page-header">
+        <h1>Contactez-moi</h1>
+        <p>Une idée, une question ou une collaboration ? Écrivez-moi 🌿</p>
+    </header>
+
+    {% for message in app.flashes('success') %}
+        <p class="alert success">{{ message }}</p>
+    {% endfor %}
+
+    <section class="contact-form">
+        {{ include('home/_contact_form.html.twig') }}
+    </section>
+</main>
 {% endblock %}

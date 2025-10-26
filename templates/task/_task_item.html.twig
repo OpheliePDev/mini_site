@@ -1,0 +1,29 @@
+<article class="list-group-item {{ task.isDone ? 'done' : '' }}">
+    <section class="task-info">
+        {% if task.isDone %}
+            ✅ <s>{{ task.title }}</s>
+        {% else %}
+            🔹 {{ task.title }}
+        {% endif %}
+        {% if task.priority %}
+            <span class="badge {{ task.priority|lower == 'high' ? 'badge-high' : task.priority|lower == 'medium' ? 'badge-medium' : 'badge-low' }}">
+                {{ task.priority|capitalize }}
+            </span>
+        {% endif %}
+        <time class="task-date" datetime="{{ task.createdAt|date('c') }}">{{ task.createdAt|date('Y-m-d') }}</time>
+    </section>
+
+    <nav class="task-actions">
+        <form method="post" action="{{ path('app_task_toggle', {'id': task.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ task.id) }}">
+            <button class="btn {{ task.isDone ? 'btn-secondary' : 'btn-success' }}">
+                {{ task.isDone ? '↩️ Restaurer' : '✅ Terminer' }}
+            </button>
+        </form>
+        <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Modifier</a>
+        <form method="post" action="{{ path('app_task_delete', {'id': task.id}) }}" onsubmit="return confirm('Supprimer cette tâche ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+            <button class="btn btn-danger">🗑️</button>
+        </form>
+    </nav>
+</article>

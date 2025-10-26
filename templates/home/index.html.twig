@@ -3,28 +3,27 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<main class="container py-5">
-    <section class="text-center mb-5">
-        <h1 class="display-4 fw-bold mb-3 text-primary">
-            🧠 Rappel Symfony - <strong>ToDoList</strong>
-        </h1>
-        <p class="lead text-muted">
-            Ce mini-projet a été réalisé pour réviser les bases de <strong>Symfony</strong> : routes, contrôleurs, entités, formulaires et templates.
-        </p>
-        <p class="text-muted">
-            Il utilise <strong>Bootstrap 5</strong> pour le design et met en pratique la gestion d'une <em>ToDoList</em> simple et efficace.
-        </p>
+<main class="home-page">
+    <section class="hero">
+        <h1>Bienvenue sur mon site ! 🌱</h1>
+        <p>Découvrez mes projets Symfony, mes mini-applications et mon portfolio GreenTech.</p>
     </section>
-    <article class="card shadow-sm border-0 mx-auto" style="max-width 700px;">
-        <section class="card-body text-center">
-            <h2 class="card-title mb-3">🚀 Commencer</h2>
-            <p class="text-muted mb-4">
-                Clique que le bouton ci-dessous pour accéder à la liste des tâches.
-            </p>
-            <a href="{{ path('app_task_index') }}" class="btn btn-primary btn-lg">
-                Voir la ToDoList
-            </a>
-        </section>
-    </article>
+
+    <section class="about-me">
+        <h2>À propos de moi</h2>
+        <p>En tant que développeuse Symfony, je suis passionnée par les solutions durables et performantes. Mon objectif est de créer des sites et/ou applications optimisées, accessibles et éco-responsables.</p>
+    </section>
+
+    <section class="featured-projects">
+        <h2>Projets récents</h2>
+        <ul class="projects-list">
+            <li>
+                <h3>Gestionnaire de tâches</h3>
+                <p>CRUD complet avec entités Task et TaskList. Interface propre et responsive.</p>
+                <a href="{{ path('app_task_list_index') }}" class="btn btn-primary">Voir la ToDoList</a>
+            </li>
+            <!-- Ajouter d’autres projets ici -->
+        </ul>
+    </section>
 </main>
 {% endblock %}

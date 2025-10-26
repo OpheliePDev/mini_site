@@ -1,7 +1,12 @@
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 
-{% block title %}A propos de moi{% endblock %}
+{% block title %}À propos{% endblock %}
+
 {% block body %}
-    <h1>A propos</h1>
-    <p>Créé par {{ app_author }}.</p>
+<main class="about-page">
+    <section class="about-intro">
+        <h1>{{ title }}</h1>
+        <p>Développeuse Symfony, passionné par le GreenTech et le web performant. J'aime créer des applications rapides, accessibles et respectueuses de l’environnement numérique.</p>
+    </section>
+</main>
 {% endblock %}

@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'class': 'contact-form-wrapper', 'novalidate': 'novalidate'}}) }}
+<fieldset>
+    <legend>Formulaire de contact</legend>
+
+    <p>
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'input-field'}}) }}
+        {{ form_errors(form.name) }}
+    </p>
+
+    <p>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'input-field'}}) }}
+        {{ form_errors(form.email) }}
+    </p>
+
+    <p>
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message, {'attr': {'class': 'textarea-field'}}) }}
+        {{ form_errors(form.message) }}
+    </p>
+
+    <button type="submit" class="btn btn-primary">📨 Envoyer</button>
+</fieldset>
+{{ form_end(form) }}

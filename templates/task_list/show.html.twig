@@ -3,52 +3,14 @@
 {% block title %}{{ task_list.name }}{% endblock %}
 
 {% block body %}
-<section class="container py-4">
-    <h1 class="text-center text-primary mb-4">
-        📋 Liste : {{ task_list.name }}
-    </h1>
-    <ul class="list-group shadow-sm">
-        {% for task in task_list.tasks %}
-            <li class="list-group-item d-flex justify-content-between align-items-center
-                       {% if task.isDone %} text-muted bg-light {% endif %}">
+<main class="task-list-show">
+    <h1 class="page-title">📋 Liste : {{ task_list.name }}</h1>
 
-                <div>
-                    {% if task.isDone %}
-                        ✅ <s>{{ task.title }}</s>
-                    {% else %}
-                        🔹 {{ task.title }}
-                    {% endif %}
-                    <small class="text-muted">[{{ task.priority|capitalize }}] {{ task.createdAt|date('Y-m-d') }}</small>
-                </div>
+    {% include 'task_list/_task_list_item.html.twig' with {'task_list': task_list} %}
 
-                <div class="d-flex gap-2">
-                    <form method="post" action="{{ path('app_task_toggle', {'id': task.id}) }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ task.id) }}">
-                        <button class="btn btn-sm {{ task.isDone ? 'btn-secondary' : 'btn-success' }}">
-                            {{ task.isDone ? '↩️ Restaurer' : '✅ Terminer' }}
-                        </button>
-                    </form>
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
-                    <form method="post" action="{{ path('app_task_delete', {'id': task.id}) }}" onsubmit="return confirm('Supprimer cette tâche ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
-                        <button class="btn btn-danger btn-sm">🗑️ Supprimer</button>
-                    </form>
-                </div>
-            </li>
-        {% else %}
-            <li class="list-group-item text-center text-muted">
-                Aucune tâche pour cette liste.
-            </li>
-        {% endfor %}
-    </ul>
-
-    <section class="text-center mt-4 d-flex justify-content-center gap-3">
-        <a href="{{ path('app_task_new', {'listId': task_list.id}) }}" class="btn btn-primary">
-            ➕ Ajouter une tâche
-        </a>
-        <a href="{{ path('app_task_list_index') }}" class="btn btn-secondary">
-            ⬅️ Retour aux listes
-        </a>
-    </section>
-</section>
+    <footer class="task-list-footer">
+        <a href="{{ path('app_task_list_index') }}" class="btn btn-secondary">⬅️ Retour aux listes</a>
+        <a href="{{ path('app_task_new', {'listId': task_list.id}) }}" class="btn btn-primary">➕ Ajouter une tâche</a>
+    </footer>
+</main>
 {% endblock %}

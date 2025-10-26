@@ -1,3 +1,261 @@
 body {
-    background-color: skyblue;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+}
+/* === Header === */
+.header {
+    background: #2e7d32;
+    color: white;
+    padding: 1rem 2rem;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+}
+.nav-menu a:hover {
+    text-decoration: underline;
+}
+.nav-brand {
+    color: white;
+    text-decoration: none;
+}
+.footer-logo {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.footer-logo__img {
+    width: 100px;
+    height: auto;
+}
+/* Footer */
+.footer {
+    background: #e8f5e9;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    a {
+        color: #236c2e;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+button, a.btn {
+    cursor: pointer;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+/* === Page Titles === */
+.page-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem 0;
+    color: #1a7f37; /* vert doux pour thème GreenTech */
+}
+/* === Task List === */
+.task-lists-container, .task-list-show {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+.task-list {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+.task-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.task-list-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+.task-list-actions a, 
+.task-list-actions button {
+    margin-left: 0.5rem;
+}
+/* === Tasks === */
+.task-list-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+article.task-list article.task-list-tasks article.task-item,
+article.task-list article.task-list-tasks li {
+    margin-bottom: 0.5rem;
+}
+.task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.task-info s {
+    color: #888;
+}
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.task-actions button {
+    font-size: 0.9rem;
+}
+/* === Badges === */
+.badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+.badge-high {
+    background-color: #e63946;
+}
+.badge-medium {
+    background-color: #f4a261;
+    color: #333;
+}
+.badge-low {
+    background-color: #2a9d8f;
+}
+/* === Footer Buttons === */
+.task-list-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.btn-primary {
+    background-color: #1a7f37;
+    color: #fff;
+}
+.btn-secondary {
+    background-color: #888;
+    color: #fff;
+}
+.btn-warning {
+    background-color: #f4a261;
+    color: #fff;
+}
+.btn-danger {
+    background-color: #e63946;
+    color: #fff;
+}
+.btn-light {
+    background-color: #eee;
+    color: #333;
+}
+/* === Responsive === */
+@media (max-width: 600px) {
+    .task-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .task-actions {
+        flex-direction: column;
+    }
+}
+/* === HomePage === */
+.home-page, .about-page, .contact-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+.home-page .hero {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #e6f4ea; /* vert doux */
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+.home-page h1, .about-page h1, .contact-page h1 {
+    color: #1a7f37;
+}
+.home-page .featured-projects .projects-list {
+    list-style: none;
+    padding: 0;
+}
+.home-page .featured-projects .projects-list li {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.projects-list a.btn {
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+.contact-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.alert.success {
+  background: #e0f5e4;
+  color: #236c2e;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+}
+.contact-form-wrapper fieldset {
+  border: none;
+  display: grid;
+  gap: 1rem;
+}
+.input-field,
+.textarea-field {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.input-field:focus,
+.textarea-field:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+.btn-primary {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-primary:hover {
+  background: #3c8c41;
 }
