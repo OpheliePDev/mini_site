@@ -1,16 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ task_list.name }}{% endblock %}
+{% block title %}Liste : {{ task_list.name }}{% endblock %}
 
 {% block body %}
-<main class="task-list-show">
-    <h1 class="page-title">📋 Liste : {{ task_list.name }}</h1>
-
-    {% include 'task_list/_task_list_item.html.twig' with {'task_list': task_list} %}
-
-    <footer class="task-list-footer">
-        <a href="{{ path('app_task_list_index') }}" class="btn btn-secondary">⬅️ Retour aux listes</a>
-        <a href="{{ path('app_task_new', {'listId': task_list.id}) }}" class="btn btn-primary">➕ Ajouter une tâche</a>
-    </footer>
-</main>
+    <section class="main-content-wrapper">
+        <header class="task-list-header">
+            <h1 class="text-3xl font-semibold text-green-700 m-0">
+                Liste : {{ task_list.name }}
+            </h1>
+            <nav class="task-list-actions">
+                <a href="{{ path('app_task_list_edit', {'id': task_list.id}) }}" class="btn-base btn-warning">
+                    ✍️ Modifier la liste
+                </a>
+                {% include 'task_list/_delete_form.html.twig' with {'task_list': task_list} %}
+            </nav>
+        </header>
+        <hr class="my-6 border-gray-300">
+        <div class="text-center mb-6">
+            <a href="{{ path('app_task_new', {'listId': task_list.id}) }}" class="btn-base btn-primary">
+                ➕ Ajouter une nouvelle tâche
+            </a>
+        </div>
+        <section class="task-list-tasks space-y-4">
+            {% if task_list.tasks|length > 0 %}
+                {% for task in task_list.tasks %}
+                    {# Utilise le template _task_item.html.twig que nous avons stylisé #}
+                    {% include 'task/_task_item.html.twig' with {'task': task} %}
+                {% endfor %}
+            {% else %}
+                <p class="no-tasks">
+                    Cette liste est vide. Commencez par ajouter une tâche !
+                </p>
+            {% endif %}
+        </section>
+        <footer class="mt-8 text-center">
+            <a href="{{ path('app_task_list_index') }}" class="btn-base btn-light text-gray-700 hover:text-green-700">
+                ← Retour à toutes les listes
+            </a>
+        </footer>
+    </section>
 {% endblock %}

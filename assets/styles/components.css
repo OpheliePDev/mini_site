@@ -1,0 +1,204 @@
+/*
+|--------------------------------------------------------------------------
+| 1. General Structure & Layout
+|--------------------------------------------------------------------------
+*/
+
+/* --- Global Content Wrapper --- */
+.main-content-wrapper {
+    @apply max-w-4xl mx-auto p-4;
+}
+.page-title {
+    @apply text-center text-3xl font-semibold mt-8 mb-4 text-green-700;
+}
+/* --- Base.html.twig Layout --- */
+.header {
+    @apply bg-[#2E7D32] text-white py-4 px-8 shadow-md;
+}
+.navbar {
+    @apply mx-auto;
+}
+.nav-container {
+    @apply flex justify-between items-center;
+}
+.nav-brand {
+    @apply text-white text-xl font-bold tracking-tight no-underline hover:text-green-200;
+}
+.nav-menu {
+    @apply flex space-x-6 list-none p-0 m-0;
+}
+.nav-menu a {
+    @apply text-white no-underline hover:underline;
+}
+.footer {
+    @apply bg-green-50 py-6 mt-8 text-sm text-gray-700 text-center;
+}
+.footer a {
+    @apply text-green-700 font-bold no-underline hover:underline transition duration-150;
+}
+.footer-logo__img {
+    @apply w-24 h-auto mx-auto;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 2. Reusable UI Elements (Buttons & Badges)
+|--------------------------------------------------------------------------
+*/
+
+/* --- Buttons --- */
+.btn-base {
+  /* Le style de base du bouton */
+  @apply cursor-pointer border-none px-4 py-2 rounded-md text-center inline-block font-bold transition duration-150;
+}
+/* Styles contextuels (appliqués en plus de .btn-base) */
+.btn-primary {
+    @apply bg-green-700 text-white hover:bg-green-800 focus:ring-4 focus:ring-green-300;
+}
+.btn-secondary {
+    @apply bg-gray-500 text-white hover:bg-gray-600 focus:ring-4 focus:ring-gray-300;
+}
+.btn-warning {
+    @apply bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:ring-orange-200;
+}
+.btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300;
+}
+.btn-light {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-4 focus:ring-gray-100;
+}
+
+/* --- Badges --- */
+.badge {
+    @apply px-2 py-1 rounded-sm text-xs font-bold text-white;
+}
+.badge-high {
+    @apply bg-red-600;
+}
+.badge-medium {
+    @apply bg-orange-400 text-gray-800;
+}
+.badge-low {
+    @apply bg-teal-500;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 3. Task Components
+|--------------------------------------------------------------------------
+*/
+
+/* --- Global Task Messages --- */
+.no-tasks {
+    @apply text-gray-500 italic p-2 text-center;
+}
+.no-lists {
+    @apply text-center p-8 bg-gray-100 rounded-lg shadow-inner text-gray-600;
+}
+.list-summary-item {
+    @apply bg-white p-4 rounded-lg shadow-sm mb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center border-l-4 border-green-600 hover:shadow-md transition duration-150;
+}
+/* --- Individual Task Item (Used in task_list/show.html.twig) --- */
+.task-item {
+    @apply bg-white p-4 rounded-lg shadow-sm mb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center;
+}
+.task-item-done {
+    @apply border-l-4 border-gray-400 opacity-70;
+}
+.task-item-active {
+    @apply border-l-4 border-green-600 hover:shadow-md transition duration-150;
+}
+.task-info {
+    @apply flex-1 min-w-0 mb-2 sm:mb-0 mr-4;
+}
+.task-title {
+    @apply text-xl font-semibold mb-1 truncate;
+}
+.task-actions {
+    @apply flex space-x-2 mt-2 sm:mt-0;
+}
+/* --- Task List Details Header (Used in task_list/show.html.twig) --- */
+.task-list-header {
+    @apply flex flex-wrap justify-between items-center mb-4 gap-4;
+}
+.task-list-actions {
+    @apply flex space-x-2;
+}
+/*
+|--------------------------------------------------------------------------
+| 4. Specific Content Components (Hero, About, Projects)
+|--------------------------------------------------------------------------
+*/
+
+/* --- Hero section & About Intro --- */
+.hero {
+  @apply text-center p-8 rounded-lg bg-green-50 mb-8;
+}
+.hero h1, .about-intro h1 {
+  @apply text-3xl font-bold text-green-700 mb-4;
+}
+.hero p, .about-intro p {
+  @apply text-gray-800 text-lg;
+}
+
+/* --- About me section --- */
+.about-me {
+  @apply mb-8;
+}
+.about-me h2 {
+  @apply text-2xl font-semibold text-green-700 mb-2;
+}
+.about-me p {
+  @apply text-gray-700 leading-relaxed;
+}
+
+/* --- Featured projects --- */
+.featured-projects h2 {
+  @apply text-2xl font-semibold mb-4 text-green-700;
+}
+.projects-list {
+  @apply space-y-4;
+}
+.projects-list li {
+  @apply bg-white p-4 rounded-lg shadow-md;
+}
+.projects-list h3 {
+  @apply text-green-800 font-medium mb-2;
+}
+.projects-list p {
+  @apply text-gray-700 mb-2;
+}
+/*
+|--------------------------------------------------------------------------
+| 5. Form Elements
+|--------------------------------------------------------------------------
+*/
+
+/* --- Form Field Structure --- */
+.form-fieldset {
+    @apply mb-5;
+}
+.form-label {
+    @apply block text-lg font-bold text-gray-700 mb-2;
+}
+/* --- Input & Textarea Base Style --- */
+.form-input-base {
+    @apply w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring-1 focus:ring-green-500 transition duration-150;
+}
+/* --- Form Errors --- */
+.form-error {
+    @apply mt-2 text-sm text-red-600;
+}
+/* --- Specific Field Group: CreatedAt (Read-only) --- */
+.form-readonly-group {
+    @apply bg-gray-50 p-4 rounded-lg shadow-inner border border-gray-200;
+}
+.form-group-header {
+    @apply flex items-center mb-3 text-lg font-semibold text-gray-800;
+}
+.form-icon {
+    @apply w-6 h-6 mr-2 text-green-700;
+}
+.form-control-readonly {
+    @apply bg-white p-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 cursor-default;
+}

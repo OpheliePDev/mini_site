@@ -3,7 +3,8 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<main class="home-page">
+<main class="flex-1 max-w-5xl mx-auto px-6 py-10">
+
     <section class="hero">
         <h1>Bienvenue sur mon site ! 🌱</h1>
         <p>Découvrez mes projets Symfony, mes mini-applications et mon portfolio GreenTech.</p>
@@ -20,10 +21,11 @@
             <li>
                 <h3>Gestionnaire de tâches</h3>
                 <p>CRUD complet avec entités Task et TaskList. Interface propre et responsive.</p>
-                <a href="{{ path('app_task_list_index') }}" class="btn btn-primary">Voir la ToDoList</a>
+                <a href="{{ path('app_task_list_index') }}" class="btn-base">Voir la ToDoList</a>
             </li>
             <!-- Ajouter d’autres projets ici -->
         </ul>
     </section>
+
 </main>
 {% endblock %}

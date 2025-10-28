@@ -22,7 +22,7 @@ class TaskRepository extends ServiceEntityRepository
      * @param int|null $taskListId
      * @return Task[]
      */
-    public function findOrderByStatus(?int $taskListId = null): array
+    public function findOrderedByStatus(?int $taskListId = null): array
     {
         $qb = $this->createQueryBuilder('t')
             ->orderBy('t.isDone', 'ASC')

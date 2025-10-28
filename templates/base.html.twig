@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mon site{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Application Symfony éco-responsable et minimaliste{% endblock %}">
-    {# Feuille de style (CSS simple ou build Tailwind plus tard) #}
-    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock%}
 </head>
-<body>
+<body class="min-h-screen bg-gray-50 text-gray-800 antialiased"> 
     <header class="header">
         <nav class="navbar">
             <section class="nav-container">
@@ -24,7 +25,8 @@
     </header>
 
     <main class="main-content">
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
     </main>
 
     <footer class="footer">
@@ -33,7 +35,7 @@
                 <img src="{{ site.logo }}" alt="{{ site.name }}" class="footer-logo__img">
             </figure>
         {% endif %}
-        <p>© {{ site.name }} - {{ "now"|date("Y") }}</p>
+        <p>&copy; {{ site.name }} - {{ "now"|date("Y") }}</p>
         <p>
             Contact : 
             <a href="mailto:{{ site.email }}">{{ site.email }}</a>

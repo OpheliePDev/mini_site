@@ -1,23 +1,53 @@
-<article class="task-list">
-    <header class="task-list-header local-header">
-        <h2>{{ task_list.name }}</h2>
-        <nav class="task-list-actions">
-            <a href="{{ path('app_task_list_show', {'id': task_list.id}) }}" class="btn btn-light">Voir</a>
-            <a href="{{ path('app_task_list_edit', {'id': task_list.id}) }}" class="btn btn-warning">Modifier</a>
-            <form method="post" action="{{ path('app_task_list_delete', {'id': task_list.id}) }}" onsubmit="return confirm('Supprimer cette liste ?');" style="display:inline;">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task_list.id) }}">
-                <button class="btn btn-danger">Supprimer</button>
-            </form>
-        </nav>
-    </header>
+{# Détermination des métriques de la liste pour la progression #}
+{% set totalTasks = task_list.tasks|length %}
+{% set completedTasks = task_list.tasks|filter(task => task.isDone)|length %}
+{% set percentage = totalTasks > 0 ? (completedTasks / totalTasks * 100)|round : 0 %}
 
-    <section class="task-list-tasks">
-        {% if task_list.tasks|length > 0 %}
-            {% for task in task_list.tasks %}
-                {% include 'task/_task_item.html.twig' with {'task': task} %}
-            {% endfor %}
-        {% else %}
-            <p class="no-tasks">Aucune tâche dans cette liste.</p>
-        {% endif %}
+<article class="list-summary-item flex flex-col sm:flex-row justify-between items-start sm:items-center">
+    
+    {# --- Informations de la Liste (Titre & Progression) --- #}
+    <section class="flex-1 min-w-0 mb-2 sm:mb-0 mr-4">
+        
+        <h2 class="text-xl font-bold text-gray-800 hover:text-green-700 transition mb-1">
+            <a href="{{ path('app_task_list_show', {'id': task_list.id}) }}" class="no-underline">
+                {{ task_list.name }}
+            </a>
+        </h2>
+        
+        {# Progression compacte #}
+        <div class="text-sm text-gray-600 flex items-center space-x-3">
+            <span>{{ completedTasks }} / {{ totalTasks }} tâches</span>
+            
+            {# Indicateur visuel rapide #}
+            <span class="font-bold 
+                {% if percentage == 100 %}text-green-600
+                {% elseif percentage > 0 %}text-orange-500
+                {% else %}text-red-500
+                {% endif %}">
+                ({{ percentage }}% complété)
+            </span>
+            
+            {# Statut rapide #}
+            {% if totalTasks == 0 %}
+                <span class="badge badge-medium">Liste vide</span>
+            {% elseif percentage == 100 %}
+                <span class="badge bg-green-700">Terminée</span>
+            {% endif %}
+        </div>
     </section>
+
+    {# --- Actions de la Liste --- #}
+    <nav class="task-actions flex space-x-2 mt-2 sm:mt-0">
+        
+        <a href="{{ path('app_task_list_show', {'id': task_list.id}) }}" class="btn-base btn-light text-gray-700 hover:text-green-700">
+            Voir Tâches
+        </a>
+        
+        <a href="{{ path('app_task_list_edit', {'id': task_list.id}) }}" class="btn-base btn-warning p-2">
+            ✍️
+        </a>
+        
+        {# Formulaire de suppression compact #}
+        {% include 'task_list/_delete_form.html.twig' with {'task_list': task_list, 'button_class': 'btn-base btn-danger p-2'} %}
+    </nav>
 </article>

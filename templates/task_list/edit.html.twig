@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit TaskList{% endblock %}
+{% block title %}Modifier la liste{% endblock %}
 
 {% block body %}
-    <h1>Edit TaskList</h1>
-
-    {{ include('task_list/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_task_list_index') }}">back to list</a>
-
+    <section class="main-content-wrapper">
+        <h1 class="page-title">✍️ Modifier la liste</h1>
+        <article class="bg-white p-6 rounded-lg shadow-xl">
+            {{ include('task_list/_form.html.twig', {'button_label': 'Update'}) }}
+            <footer class="flex justify-between items-center mt-6 pt-4 border-t border-gray-200">
+                <a href="{{ path('app_task_list_index') }}" class="btn-base btn-light text-gray-700 hover:text-green-700">⬅️ Retour à la liste</a>
+            </footer>
+        </article>
+    </section>
     {{ include('task_list/_delete_form.html.twig') }}
 {% endblock %}
