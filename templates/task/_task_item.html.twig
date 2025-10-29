@@ -3,31 +3,30 @@
         task-item-done
     {% else %}
         task-item-active
-    {% endif %}
-">
-    
+    {% endif %}">
     <section class="task-info">
-        
-        {# --- Titre de la Tâche (Utilise .task-title) --- #}
         <header class="task-title">
-            {% if task.isDone %}
-                <span class="text-gray-500">
-                    <svg class="w-5 h-5 inline-block text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span class="task-title-wrapper 
+                {% if task.isDone %}text-gray-500{% else %}text-gray-900{% endif %}
+            ">
+                <svg class="task-icon-status text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="
+                        {% if task.isDone %}
+                            M5 13l4 4L19 7
+                        {% else %}
+                            M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z
+                        {% endif %}
+                    "></path>
+                </svg>
+                {% if task.isDone %}
                     <s class="italic">{{ task.title }}</s>
-                </span>
-            {% else %}
-                <span class="text-gray-900">
-                    <svg class="w-5 h-5 inline-block text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                {% else %}
                     {{ task.title }}
-                </span>
-            {% endif %}
+                {% endif %}
+            </span>
         </header>
-
-        {# --- Infos secondaires (Priorité & Date) --- #}
-        <div class="flex items-center space-x-3 text-sm text-gray-600">
-            
+        <time class="task-metadata">
             {% if task.priority %}
-                {# Utilisation des classes de badges #}
                 <span class="badge 
                     {% if task.priority|lower == 'high' %}badge-high
                     {% elseif task.priority|lower == 'medium' %}badge-medium
@@ -36,22 +35,16 @@
                     {{ task.priority|capitalize }}
                 </span>
             {% endif %}
-            
-            <time class="task-date flex items-center" datetime="{{ task.createdAt|date('c') }}">
+            <span class="task-date-info" datetime="{{ task.createdAt|date('c') }}">
                 <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 Créé le {{ task.createdAt|date('d/m/Y') }}
-            </time>
-        </div>
-
+            </span>
+        </time>
     </section>
-
-    {# --- Actions de la Tâche (Utilise .task-actions) --- #}
     <nav class="task-actions">
-        
-        {# Bouton Toggle (Terminer / Restaurer) #}
         <form method="post" action="{{ path('app_task_toggle', {'id': task.id}) }}" class="inline-block">
             <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ task.id) }}">
-            <button class="btn-base 
+            <button class="btn-base task-action-toggle
                 {% if task.isDone %}
                     btn-light text-gray-700 hover:text-green-800
                 {% else %}
@@ -60,17 +53,13 @@
                 {{ task.isDone ? '↩️ Restaurer' : '✅ Terminer' }}
             </button>
         </form>
-        
-        {# Bouton Modifier #}
-        <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn-base btn-light text-gray-700 hover:text-blue-600">
+        <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn-base btn-warning text-gray-700 hover:text-blue-600">
             ✍️ Modifier
         </a>
-        
-        {# Bouton Supprimer #}
         <form method="post" action="{{ path('app_task_delete', {'id': task.id}) }}" onsubmit="return confirm('Supprimer cette tâche ?');" class="inline-block">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
-            <button class="btn-base bg-red-500 text-white hover:bg-red-600 p-2 leading-none">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            <button class="btn-base btn-danger">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
             </button>
         </form>
     </nav>

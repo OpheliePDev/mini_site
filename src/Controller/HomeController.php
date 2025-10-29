@@ -27,6 +27,7 @@ final class HomeController extends AbstractController
             'title' => 'À propos de moi',
         ]);
     }
+    
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, MailerInterface $mailer): Response
     {
@@ -35,18 +36,33 @@ final class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            
+            // L'adresse d'expédition DOIT correspondre à l'adresse de connexion du MAILER_DSN
+            $senderEmail = 'ophelie.pereira.dev@gmail.com'; 
 
             $email = (new Email())
-                ->from($data['email'])
+                // Expéditeur (technique) : Votre adresse Gmail
+                ->from($senderEmail) 
+                
+                // Destinataire (vous)
                 ->to('ophelie.pereira.dev@gmail.com')
+                
+                // Ajout du ReplyTo pour la réponse rapide à l'utilisateur
+                ->replyTo($data['email']) 
+                
                 ->subject('📩 Nouveau message depuis le formulaire de contact')
+                // Utilisez $data['name'] dans le corps du message pour savoir qui a contacté
                 ->text("Nom: {$data['name']}\nEmail : {$data['email']}\nMessage : {$data['message']}");
             
+            try {
                 $mailer->send($email);
-
                 $this->addFlash('success', 'Merci ! Votre message a été envoyé.');
+            } catch (\Exception $e) {
+                // Gestion d'erreur en cas de problème de connexion (DSN incorrect)
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi du message. Veuillez vérifier votre configuration.');
+            }
 
-                return $this->redirectToRoute('contact');
+            return $this->redirectToRoute('contact');
         }
 
         return $this->render('home/contact.html.twig', [
