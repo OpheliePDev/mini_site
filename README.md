@@ -48,20 +48,6 @@ symfony console make:migration
 symfony console doctrine:migrations:migrate
 ```
 
-### Installer les dépendances GraphQL (si nécessaire)
-
-```bash
-composer require webonyx/graphql-php
-```
-
-### Compiler/Rust (si nécessaire)
-
-```bash
-# Exemple pour compiler un projet Rust
-cd rust-backend
-cargo build --release
-```
-
 ---
 
 ## Commandes utiles
@@ -108,11 +94,10 @@ src/
 migrations/       # Fichiers de migration pour mettre à jour la base
 templates/        # Fichiers HTML dynamiques (Twig)
 public/           # Fichiers accessibles depuis le navigateur
-graphql/          # Schémas et resolvers GraphQL
-rust-backend/     # Code Rust pour microservices ou extensions performantes
+
 ```
 
-### Schéma de fonctionnement
+## Schéma de fonctionnement
 
 ```
 [Base de données] <---> [Entity] <---> [Repository]
@@ -129,8 +114,6 @@ rust-backend/     # Code Rust pour microservices ou extensions performantes
 * **Migrations** : versionnent la base et suivent les entités
 * **Templates** : affichage HTML dynamique
 * **Public** : point d’entrée visible par le navigateur
-* **GraphQL** : interface flexible pour interroger et modifier les données
-* **Rust** : code performant pour certaines parties backend
 
 ---
 
@@ -138,6 +121,7 @@ rust-backend/     # Code Rust pour microservices ou extensions performantes
 
 * `main` : branche stable, contient le projet fonctionnel
 * `todolist` : branche de développement de la fonctionnalité TodoList
+* `tasklist` : branche de développement de la fonctionnalité Liste de tâches
 
   * Ajout de la gestion des priorités
   * Code expérimental à fusionner dans `main` après validation
@@ -171,6 +155,7 @@ git push origin ma-fonctionnalité
 
 * Toujours valider les migrations avant de les exécuter
 * Les champs `nullable` dans les entités doivent correspondre à la base
+* Workflow Git : Une fois qu'une fonctionnalité est terminée et validée, la branche de fonctionnalité est fusionnée avec la branche `main`. Toutes les branches de travail sont visibles dans le dépôt.
 
 ---
 
