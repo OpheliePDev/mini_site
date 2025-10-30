@@ -12,15 +12,48 @@
 <body class="min-h-screen bg-gray-50 text-gray-800 antialiased"> 
     <header class="header">
         <nav class="navbar">
-            <section class="nav-container">
+            <!-- La section agit maintenant comme un conteneur simple -->
+            <section class="nav-section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
+                
+                <!-- Logo -->
                 <a href="{{ path('app_home') }}" class="nav-brand">🌱 EcoDevLab - Symfony</a>
-                <ul class="nav-menu">
+
+                <!-- Liens du Menu Principal (Desktop) -->
+                <!-- Utilisation de la nouvelle classe CSS 'nav-desktop' -->
+                <ul class="nav-desktop space-x-6 list-none p-0 m-0"> 
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('about') }}">À propos</a></li>
                     <li><a href="{{ path('app_task_list_index') }}">ToDoList</a></li>
                     <li><a href="{{ path('contact') }}">Contact</a></li>
                 </ul>
+
+                <!-- Bouton Burger (Mobile) -->
+                <!-- Utilisation de la nouvelle classe CSS 'nav-mobile-toggler' -->
+                <span id="menu-button-wrapper" class="nav-mobile-toggler flex items-center">
+                    <button id="menu-button" class="inline-flex items-center justify-center p-2 rounded-xl bg-green-800 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-50 transition duration-200" aria-expanded="false">
+                        <span class="sr-only">Ouvrir le menu principal</span>
+                        <!-- Icône Burger (Hamburger) -->
+                        <svg id="icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icône Croix (Close) -->
+                        <svg id="icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </span>
             </section>
+        
+            <!-- Menu Mobile (Affiché/Caché par JavaScript) -->
+            <!-- Utilisation de la nouvelle classe CSS 'nav-mobile-dropdown' -->
+            <nav id="mobile-menu" class="nav-mobile-dropdown hidden"> 
+                <ul class="nav-mobile-list">
+                    <li><a href="{{ path('app_home') }}" class="nav-mobile-link">Accueil</a></li>
+                    <li><a href="{{ path('about') }}" class="nav-mobile-link">À propos</a></li>
+                    <li><a href="{{ path('app_task_list_index') }}" class="nav-mobile-link">ToDoList</a></li>
+                    <li><a href="{{ path('contact') }}" class="nav-mobile-link">Contact</a></li>
+                </ul>
+            </nav>
         </nav>
     </header>
 
@@ -41,5 +74,12 @@
             <a href="mailto:{{ site.email }}">{{ site.email }}</a>
         </p>
     </footer>
+
+    {# 
+       Inclusion du script JS via Encore.
+    #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 </body>
 </html>
