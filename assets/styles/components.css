@@ -29,7 +29,6 @@
     /* Font plus grand et plus impactant, couleur plus sombre en Light Mode */
     @apply text-gray-800 text-2xl font-extrabold tracking-wide no-underline hover:text-teal-600 transition duration-200;
 }
-
 /* --- Menu Desktop (Règles de visibilité du menu principal) --- */
 .nav-desktop {
     @apply hidden lg:flex space-x-6 list-none p-0 m-0;
@@ -61,8 +60,6 @@ a:focus {
     /* Liens mobile doux */
     @apply text-gray-800 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium transition duration-150;
 }
-
-
 .footer {
     /* Design du footer plus doux et minimaliste */
     @apply bg-gray-50 py-8 mt-12 text-sm text-gray-600 text-center border-t-4 border-teal-600;
@@ -187,6 +184,9 @@ a:focus {
 }
 .task-date-info {
     @apply flex items-center;
+}
+.list-name {
+    @apply text-xl font-bold text-teal-800 hover:text-teal-400 transition mb-1;
 }
 /*
 |--------------------------------------------------------------------------
