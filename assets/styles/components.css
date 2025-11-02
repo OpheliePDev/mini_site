@@ -37,11 +37,14 @@
 .nav-desktop a {
     @apply text-white text-base font-medium no-underline hover:text-green-200 transition duration-200;
 }
+a:focus {
+    @apply outline-none ring-2 ring-green-500 ring-offset-2;
+}
 
 /* --- Bouton Burger (Règles de visibilité du bouton) --- */
 .nav-mobile-toggler {
     /* Affiché par défaut (mobile/tablette), masqué à partir de LG */
-    @apply lg:hidden;
+    @apply lg:hidden bg-green-800 text-white p-2 rounded-xl hover:bg-green-600 focus:ring-4 focus:ring-green-400/50 transition;
 }
 
 /* --- Menu Mobile (Règles de visibilité du menu déroulant) --- */
@@ -270,4 +273,83 @@
 }
 .form-control-readonly {
     @apply bg-white p-3 border border-gray-300 rounded-xl shadow-sm text-gray-700 cursor-default font-mono;
+}
+/*
+|--------------------------------------------------------------------------
+| 6. DarkMode + Smooth Theme Transition
+|--------------------------------------------------------------------------
+*/
+
+/* --- Body & Text --- */
+body {
+    @apply bg-gray-50 text-gray-800 transition-colors duration-700 ease-in-out;
+}
+.dark body {
+    @apply bg-gray-900 text-gray-100;
+}
+
+/* --- Header --- */
+.header {
+    @apply bg-green-700 text-white transition-colors duration-700 ease-in-out;
+}
+.dark .header {
+    @apply bg-green-900 text-gray-200;
+}
+/* --- Footer (optionnel, si tu veux aussi qu'il suive) --- */
+.footer {
+    @apply bg-gray-100 text-gray-700 transition-colors duration-700 ease-in-out;
+}
+.dark .footer {
+    @apply bg-gray-800 text-gray-200;
+}
+/* --- Smooth Theme Switch (fade global) --- */
+.theme-transition {
+    transition: background-color 0.6s ease, color 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.98);
+}
+/* --- Liquid Glass iOS Style Toggle --- */
+.theme-toggle {
+  @apply relative flex items-center justify-center w-14 h-14 rounded-full overflow-hidden ml-3 transition-all duration-500 ease-out;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.dark .theme-toggle {
+  background: rgba(25, 25, 25, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.3);
+}
+/* Petits reflets internes */
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+  opacity: 0.7;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+/* Icônes */
+.theme-toggle svg {
+  @apply absolute w-6 h-6 transition-all duration-500 transform;
+}
+/* Animate Sun / Moon */
+#icon-sun.active {
+    @apply translate-x-0 rotate-0 opacity-100;
+}
+#icon-sun.inactive {
+    @apply -translate-x-3 rotate-45 opacity-0;
+}
+#icon-moon.active {
+    @apply translate-x-0 rotate-0 opacity-100;
+}
+#icon-moon.inactive {
+    @apply translate-x-6 rotate-45 opacity-0;
 }

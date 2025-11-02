@@ -9,3 +9,4 @@ import './bootstrap.js';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import './js/burger_menu.js';
+import './js/dark_mode.js';

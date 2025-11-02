@@ -19,4 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
             button.setAttribute('aria-expanded', isExpanded);
         });
     }
+    // Lazy-load menu JS uniquement sur mobile
+    if (window.innerWidth < 1024) {
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const openIcon = document.getElementById("icon-open");
+      const closeIcon = document.getElementById("icon-close");
+
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+        openIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+      });
+    }
 });

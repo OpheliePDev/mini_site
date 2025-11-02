@@ -1,85 +1,77 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mon site{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Application Symfony éco-responsable et minimaliste{% endblock %}">
+<html lang="fr" class="notranslate" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}EcoDevLab - Symfony{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Application Symfony éco-responsable et minimaliste{% endblock %}" />
+    <meta name="theme-color" content="#064e3b" />
+
+    {# 🌗 Thème instantané sans flash #}
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme");
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = savedTheme ?? (systemDark ? "dark" : "light");
+        if (theme === "dark") document.documentElement.classList.add("dark");
+      })();
+    </script>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock%}
-</head>
-<body class="min-h-screen bg-gray-50 text-gray-800 antialiased"> 
-    <header class="header">
-        <nav class="navbar">
-            <!-- La section agit maintenant comme un conteneur simple -->
-            <section class="nav-section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
-                
-                <!-- Logo -->
-                <a href="{{ path('app_home') }}" class="nav-brand">🌱 EcoDevLab - Symfony</a>
-
-                <!-- Liens du Menu Principal (Desktop) -->
-                <!-- Utilisation de la nouvelle classe CSS 'nav-desktop' -->
-                <ul class="nav-desktop space-x-6 list-none p-0 m-0"> 
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('about') }}">À propos</a></li>
-                    <li><a href="{{ path('app_task_list_index') }}">ToDoList</a></li>
-                    <li><a href="{{ path('contact') }}">Contact</a></li>
-                </ul>
-
-                <!-- Bouton Burger (Mobile) -->
-                <!-- Utilisation de la nouvelle classe CSS 'nav-mobile-toggler' -->
-                <span id="menu-button-wrapper" class="nav-mobile-toggler flex items-center">
-                    <button id="menu-button" class="inline-flex items-center justify-center p-2 rounded-xl bg-green-800 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-50 transition duration-200" aria-expanded="false">
-                        <span class="sr-only">Ouvrir le menu principal</span>
-                        <!-- Icône Burger (Hamburger) -->
-                        <svg id="icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <!-- Icône Croix (Close) -->
-                        <svg id="icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </span>
-            </section>
-        
-            <!-- Menu Mobile (Affiché/Caché par JavaScript) -->
-            <!-- Utilisation de la nouvelle classe CSS 'nav-mobile-dropdown' -->
-            <nav id="mobile-menu" class="nav-mobile-dropdown hidden"> 
-                <ul class="nav-mobile-list">
-                    <li><a href="{{ path('app_home') }}" class="nav-mobile-link">Accueil</a></li>
-                    <li><a href="{{ path('about') }}" class="nav-mobile-link">À propos</a></li>
-                    <li><a href="{{ path('app_task_list_index') }}" class="nav-mobile-link">ToDoList</a></li>
-                    <li><a href="{{ path('contact') }}" class="nav-mobile-link">Contact</a></li>
-                </ul>
-            </nav>
-        </nav>
-    </header>
-
-    <main class="main-content">
-        {% block body %}
-        {% endblock %}
-    </main>
-
-    <footer class="footer">
-        {% if site.logo %}
-            <figure class="footer-logo">
-                <img src="{{ site.logo }}" alt="{{ site.name }}" class="footer-logo__img">
-            </figure>
-        {% endif %}
-        <p>&copy; {{ site.name }} - {{ "now"|date("Y") }}</p>
-        <p>
-            Contact : 
-            <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-        </p>
-    </footer>
-
-    {# 
-       Inclusion du script JS via Encore.
-    #}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+      {{ encore_entry_link_tags('app') }}
     {% endblock %}
-</body>
+  </head>
+  <body class="min-h-screen antialiased">
+    <header class="header">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-section-container">
+        {# 🌱 Nom du site à gauche #}
+        <a href="{{ path('app_home') }}" class="nav-brand">
+          🌿 EcoDevLab
+        </a>
+        {# 🌍 Menu + toggle à droite #}
+        <div class="flex items-center space-x-6">
+          <ul class="nav-desktop">
+            <li><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li><a href="{{ path('about') }}">À propos</a></li>
+            <li><a href="{{ path('app_task_list_index') }}">ToDoList</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+          </ul>
+          {# ☀️🌙 Bouton thème #}
+          <button id="theme-toggle" aria-label="Basculer le thème" class="theme-toggle">
+            <svg id="icon-sun" class="absolute w-6 h-6 text-yellow-400 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="4" fill="currentColor" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <svg id="icon-moon" class="absolute w-6 h-6 text-gray-200 hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21.75 15.002A9 9 0 0112 3a9.003 9.003 0 000 18 9 9 0 009.75-5.998z" />
+            </svg>
+          </button>
+          {# 🍔 Menu mobile #}
+          <button id="menu-toggle" class="nav-mobile-toggler">
+            <svg id="icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+      {# Utilise la classe .nav-mobile-dropdown, en gardant 'hidden' pour la gestion JavaScript. J'ai ajouté dark:bg-green-900 à la suite pour garantir le mode sombre. #}
+      <nav id="mobile-menu" class="hidden nav-mobile-dropdown dark:bg-green-900">
+        <ul class="nav-mobile-list">
+          <li><a href="{{ path('app_home') }}" class="nav-mobile-link">Accueil</a></li>
+          <li><a href="{{ path('about') }}" class="nav-mobile-link">À propos</a></li>
+          <li><a href="{{ path('app_task_list_index') }}" class="nav-mobile-link">ToDoList</a></li>
+          <li><a href="{{ path('contact') }}" class="nav-mobile-link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-content-wrapper">{% block body %}{% endblock %}</main>
+    <footer class="footer">
+      <p>&copy; EcoDevLab - {{ "now"|date("Y") }}</p>
+    </footer>
+    {% block javascripts %}
+      {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+  </body>
 </html>
