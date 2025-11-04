@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Mes Hobbies</title>
-</head>
-<body>
-    <h1>Mes Hobbies</h1>
+{% extends "base.html.twig" %}
+{% block title %}Mes loisirs{% endblock %}
+{% block body %}
+    <h1 class="flex 1 max-w-5xl mx-auto px-6 py-10">Mes Loisirs</h1>
     <ul>
         {% for hobby in hobbies %}
             <li>{{ hobby }}</li>
         {% endfor %}
     </ul>
-</body>
-<html>
+{% endblock %}

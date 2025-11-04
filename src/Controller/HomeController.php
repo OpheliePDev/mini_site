@@ -20,6 +20,15 @@ final class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/hobbies', name: 'hobbies')]
+    public function hobbies(): Response
+    {
+        $hobbies = ['Informatique', 'Développement Web', 'Formule 1', 'Jeux Vidéos'];
+        return $this->render('hobby/index.html.twig', [
+            'hobbies' => $hobbies,
+        ]);
+    }
+
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
